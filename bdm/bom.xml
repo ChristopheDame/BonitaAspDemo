@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<businessObjectModel xmlns="http://documentation.bonitasoft.com/bdm-xml-schema/1.0" modelVersion="1.0" productVersion="7.12.9">
+    <businessObjects>
+        <businessObject qualifiedName="com.company.model.Exemple">
+            <fields>
+                <field type="STRING" length="255" name="site" nullable="true" collection="false"/>
+                <field type="STRING" length="255" name="acteur" nullable="true" collection="false"/>
+                <field type="DATE" length="255" name="dateCreation" nullable="true" collection="false"/>
+                <field type="LONG" length="255" name="caseId" nullable="true" collection="false"/>
+            </fields>
+            <uniqueConstraints/>
+            <queries>
+                <query name="customQuery" content="SELECT e &#13;&#10;FROM Exemple e &#13;&#10;WHERE caseId IN :caseIds&#13;&#10;AND (:site IS NULL OR site LIKE :site)&#13;&#10;AND (:acteur IS NULL OR acteur LIKE :acteur)&#13;&#10;ORDER BY e.persistenceId ASC" returnType="java.util.List">
+                    <queryParameters>
+                        <queryParameter name="caseIds" className="[Ljava.lang.Long;"/>
+                        <queryParameter name="site" className="java.lang.String"/>
+                        <queryParameter name="acteur" className="java.lang.String"/>
+                    </queryParameters>
+                </query>
+                <query name="exempleFiltre" content="SELECT e &#13;&#10;FROM Exemple e &#13;&#10;WHERE(:site IS NULL OR e.site = :site)&#13;&#10;AND (:acteur IS NULL OR e.acteur = :acteur)&#13;&#10;AND (:dateCreation IS NULL OR CAST(e.dateCreation as date) = CAST(:dateCreation as date))&#13;&#10;AND (:caseId IS NULL OR e.caseId = :caseId)&#13;&#10;ORDER BY e.persistenceId ASC" returnType="java.util.List">
+                    <queryParameters>
+                        <queryParameter name="site" className="java.lang.String"/>
+                        <queryParameter name="acteur" className="java.lang.String"/>
+                        <queryParameter name="dateCreation" className="java.util.Date"/>
+                        <queryParameter name="caseId" className="java.lang.Long"/>
+                    </queryParameters>
+                </query>
+            </queries>
+            <indexes/>
+        </businessObject>
+    </businessObjects>
+</businessObjectModel>
